@@ -1044,3 +1044,22 @@ body { font-size: 1.0625rem; line-height: 1.65; }
 .disclaimer { position: relative; z-index: 2; max-width: 70ch; margin: 22px 0 0; color: rgba(255, 255, 255, .55); font-size: .8125rem; line-height: 1.6; }
 .legal-links { display: inline-flex; gap: 22px; flex-wrap: wrap; }
 @media (min-width: 621px) { .legal { padding-right: 96px; } }
+
+/* =========================================================
+   Ajuste final (apple-design): solo lo que se veía mal
+   ========================================================= */
+/* Servicios: las tarjetas llegan al borde de la pantalla en vez de cortarse en seco,
+   y la última se ve completa al terminar el recorrido */
+.hs.is-pinned { margin-inline: -5vw; }
+
+/* Bento: el ícono ya no pisa el título */
+.bento-empatia, .bento-claridad { padding-top: clamp(124px, 11vw, 140px); }
+
+/* Pie: los datos de contacto alineados arriba, no escalonados */
+.contact-details { align-items: start; }
+.contact-details .socials { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+
+/* WhatsApp flotante: se retira donde ya hay botones de WhatsApp a la vista */
+.wa-float { transition: opacity .35s var(--ease-out), scale .45s var(--ease-out), visibility 0s; }
+.wa-float.is-away { opacity: 0; scale: .85; visibility: hidden; pointer-events: none; transition: opacity .25s ease, scale .35s var(--ease-out), visibility 0s linear .35s; }
+.wa-float.is-away::after { animation: none; }

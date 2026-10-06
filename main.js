@@ -121,6 +121,19 @@ window.addEventListener(
 );
 updateTopbar();
 
+// ---------- WhatsApp flotante ----------
+// Se retira en el hero (escritorio) y en el contacto, donde ya hay botones de WhatsApp a la vista.
+const waFloat = document.querySelector(".wa-float");
+const contact = document.querySelector(".contact");
+if (waFloat && "IntersectionObserver" in window) {
+  const wide = window.matchMedia("(min-width: 621px)");
+  const away = { hero: false, contact: false };
+  const sync = () => waFloat.classList.toggle("is-away", (away.hero && wide.matches) || away.contact);
+  if (hero) new IntersectionObserver(([e]) => { away.hero = e.intersectionRatio > 0.35; sync(); }, { threshold: [0, 0.35, 1] }).observe(hero);
+  if (contact) new IntersectionObserver(([e]) => { away.contact = e.isIntersecting; sync(); }, { rootMargin: "0px 0px -35% 0px" }).observe(contact);
+  wide.addEventListener("change", sync);
+}
+
 // Al enfocar con teclado, la barra siempre reaparece
 topbar.addEventListener("focusin", () => topbar.classList.remove("is-hidden"));
 
